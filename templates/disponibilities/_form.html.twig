@@ -1,0 +1,50 @@
+{{ form_start(form, {'attr': {'class': 'pt-2 flex flex-col gap-2'}}) }}
+<div class="border border-black p-2">
+	<div class="flex justify-evenly">
+		{% for choice in form.radio_vehicle %}
+			{{ form_row(choice, {'row_attr': {'class': 'flex items-center gap-2'}, 'label_attr': {'class': 'order-1'}, 'attr': {'onchange': 'handleChange();'}}) }}
+		{% endfor %}
+	</div>
+	<div id="existVehicle" class="mt-4 flex gap-2">
+		<p class=" font-semibold">Choix du véhicule:</p>
+		{{ form_widget(form.vehicle) }}
+	</div>
+	<div id="newVehicle" class="hidden">
+		<div class="flex justify-between">
+			{{ form_widget(form.vehicle_brand) }}
+			{{ form_widget(form.vehicle_model) }}
+		</div>
+		<div class="text-red-500">
+			{{ form_errors(form.vehicle_brand) }}
+			{{ form_errors(form.vehicle_model) }}
+		</div>
+	</div>
+</div>
+<div>
+	<div class="flex justify-evenly font-medium">
+		{{ form_label(form.departureDate) }}
+		{{ form_label(form.returnDate) }}
+	</div>
+	<div class="flex border border-black">
+		{{ form_widget(form.departureDate, {'attr': {'class': 'w-full', 'min': "now"|date("Y-m-d", "Europe/Paris")}}) }}
+		{{ form_widget(form.returnDate, {'attr': {'class': 'w-full', 'min': "now"|date("Y-m-d", "Europe/Paris")}}) }}
+	</div>
+	<div class="text-red-500">
+		{{ form_errors(form.departureDate) }}
+		{{ form_errors(form.returnDate) }}
+	</div>
+
+
+</div>
+
+{{ form_widget(form.price) }}
+<div class="text-red-500">
+	{{ form_errors(form.price) }}
+</div>
+
+<div class=" flex items-center gap-2">
+	{{ form_widget(form.status, {'attr': {'class': 'w-auto'}}) }}
+	{{ form_label(form.status) }}
+</div>
+
+{{ form_end(form) }}

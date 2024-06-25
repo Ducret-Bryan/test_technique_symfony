@@ -1,0 +1,18 @@
+{% for disponibility in disponibilities %}
+	<tr class="even:bg-gray-100">
+		<td class="py-2">{{ disponibility.vehicle.brand }}</td>
+		<td class="py-2">{{ disponibility.vehicle.model }}</td>
+		<td class="py-2">{{ disponibility.departureDate|date("d/m/Y") }}</td>
+		<td class="py-2">{{ disponibility.returnDate|date("d/m/Y") }}</td>
+		<td class="py-2">{{ disponibility.price ~ '€'}}</td>
+		<td class="py-2">{{ (disponibility.status) ? "Disponible" : "Indisponible" }}</td>
+		<td class="py-2 flex flex-col">
+			<button type="button" data-id="{{disponibility.id}}" data-target="edit" class="btnHover h-auto font-medium">Modfier</button>
+			<button type="button" data-id="{{disponibility.id}}" data-target="delete" class="btnHover h-auto font-medium">Supprimer</button>
+		</td>
+	</tr>
+{% else %}
+	<tr>
+		<td colspan="7" class="text-center py-2">Aucune disponibilité trouvée avec se filtre.</td>
+	</tr>
+{% endfor %}

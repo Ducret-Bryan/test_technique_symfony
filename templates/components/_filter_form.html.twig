@@ -1,0 +1,25 @@
+{{ form_start(filterForm, {'attr': {'class': 'pt-2 flex flex-col gap-2'}}) }}
+<div>
+	<div class="flex justify-evenly font-medium">
+		{{ form_label(filterForm.departureDate) }}
+		{{ form_label(filterForm.returnDate) }}
+	</div>
+	<div class="flex border border-black">
+		{{ form_widget(filterForm.departureDate, {'attr': {'class': 'w-full', 'min': "now"|date("Y-m-d", "Europe/Paris")}}) }}
+		{{ form_widget(filterForm.returnDate, {'attr': {'class': 'w-full', 'min': "now"|date("Y-m-d", "Europe/Paris")}}) }}
+	</div>
+	<div class="text-red-500">
+		{{ form_errors(filterForm.departureDate) }}
+		{{ form_errors(filterForm.returnDate) }}
+	</div>
+</div>
+
+{{ form_widget(filterForm.price) }}
+<div class="text-red-500">
+	{{ form_errors(filterForm.price) }}
+</div>
+<div class="text-center pt-6">
+	<button type="submit" id="filterSubmit_btn" data-target="" data-id="" class="btn">Valider</button>
+	<button type="reset" class="negativeBtn">Actualiser</button>
+</div>
+{{ form_end(filterForm) }}

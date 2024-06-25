@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des Disponibilités
+{% endblock %}
+
+{% block javascripts %}
+	<script type="text/javascript" src="{{ asset('js/submit_form.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/crud_modal.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/filter_modal.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="py-5">
+			<h1 class="text-center text-4xl font-medium">Gestion des disponibilités</h1>
+		</div>
+
+		<div class="flex justify-between">
+			<button type="button" data-target="new" class="crud_btn h-10 px-6 bg-amber-600 text-white font-medium hover:bg-amber-600/75">Ajouter</button>
+			<button type="button" data-target="filter" class="h-10 px-6 bg-amber-600 text-white font-medium hover:bg-amber-600/75">Filtre</button>
+		</div>
+		<table class="mt-3 table w-full text-center">
+			<thead class="h-10 bg-amber-600 text-white">
+				<tr>
+					<th>Marque</th>
+					<th>Modèle</th>
+					<th>Date de départ</th>
+					<th>Date de Retour</th>
+					<th>Prix</th>
+					<th>Disponibilité</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for disponibility in disponibilities %}
+					<tr class="even:bg-gray-100">
+						<td class="py-2">{{ disponibility.vehicle.brand }}</td>
+						<td class="py-2">{{ disponibility.vehicle.model }}</td>
+						<td class="py-2">{{ disponibility.departureDate|date("d/m/Y") }}</td>
+						<td class="py-2">{{ disponibility.returnDate|date("d/m/Y") }}</td>
+						<td class="py-2">{{ disponibility.price ~ '€'}}</td>
+						<td class="py-2">{{ (disponibility.status) ? "Disponible" : "Indisponible" }}</td>
+						<td class="py-2 flex flex-col">
+							<button type="button" data-id="{{disponibility.id}}" data-target="edit" class="crud_btn btnHover h-auto font-medium">Modifier</button>
+							<button type="button" data-id="{{disponibility.id}}" data-target="delete" class="crud_btn btnHover h-auto font-medium">Supprimer</button>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="7" class="text-center py-2">Aucune disponibilité trouvée.</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+	<div id="backgroundModal" class="hidden absolute left-0 top-0 w-screen h-screen bg-gray-400 opacity-60"></div>
+	<div id="modal" class="hidden modal">
+		<div id="formContent"></div>
+		<div class="text-center pt-6">
+			<button type="submit" id="submit_btn" data-target="" data-id="" class="btn">Confirmer</button>
+			<button type="button" data-target="cancel" class="crud_btn negativeBtn">Annuler</button>
+		</div>
+	</div>
+	<aside>
+		<div id="filterModal" class="modal relaive hidden ">
+			<button type="button" data-target="filter" class="negativeBtn font-bold absolute top-2 right-2">X</button>
+			<h2 class="font-medium text-xl">Filtre</h2>
+			{% include "components/_filter_form.html.twig" %}
+		</div>
+	</aside>
+{% endblock %}

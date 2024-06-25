@@ -1,0 +1,14 @@
+<h2 class="text-xl font-medium">Suppression d'un véhicule</h2>
+<ul class="py-3 flex justify-evenly">
+	<li>
+		<span class="font-bold">Marque:</span>
+		{{vehicle.brand}}
+	</li>
+	<li>
+		<span class="font-bold">Modèle:</span>
+		{{vehicle.model}}
+	</li>
+</ul>
+<form method="post" action="{{ path('app_vehicles_delete', {'id': vehicle.id}) }}">
+	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ vehicle.id) }}">
+</form>

@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vehicles
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="py-5 ">
+			<a href="{{ path('app_vehicles_index') }}" class="text-lg text-amber-600 font-medium">Retour</a>
+			<h1 class="text-center text-4xl font-medium">Véhicule</h1>
+		</div>
+
+		<ul class="py-3 flex justify-evenly">
+			<li class="text-xl">
+				<span class="font-bold">Marque:</span>
+				{{vehicle.brand}}
+			</li>
+			<li class="text-xl">
+				<span class="font-bold">Modèle:</span>
+				{{vehicle.model}}
+			</li>
+		</ul>
+
+		<h2 class="text-xl font-medium">Les Disponibilités</h2>
+		<div class="text-right">
+			<button type="button" data-target="new" class="h-10 px-6 bg-amber-600 text-white font-medium hover:bg-amber-600/75">Ajouter</button>
+		</div>
+		<table class="mt-3 table w-full text-center">
+			<thead class="h-10 bg-amber-600 text-white">
+				<tr>
+					<th>Date de départ</th>
+					<th>Date de Retour</th>
+					<th>Prix</th>
+					<th>Disponibilité</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for disponibility in disponibilities %}
+					<tr>
+						<td>{{ disponibility.departureDate }}</td>
+						<td>{{ disponibility.returnDate }}</td>
+						<td>{{ disponibility.price }}</td>
+						<td>{{ (disponibility.status) ? "oui" : "non" }}</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="4" class="text-center py-2">Aucune disponibilité trouvée.</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+{% endblock %}

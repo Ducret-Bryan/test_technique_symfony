@@ -1,0 +1,10 @@
+{{ form_start(form, {'attr': {'class': 'mt-4 flex flex-col gap-2'}}) }}
+
+{{ form_widget(form.brand) }}
+{{ form_errors(form.brand) }}
+
+{{ form_widget(form.model) }}
+<div class="text-red-500">
+	{{ form_errors(form.model) }}
+</div>
+{{ form_end(form) }}

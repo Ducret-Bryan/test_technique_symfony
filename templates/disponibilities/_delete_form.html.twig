@@ -1,0 +1,22 @@
+<h2 class="text-xl font-medium">Suppression d'une Disponibilité</h2>
+<ul class="py-3">
+	<li>
+		<span class="font-medium">Date de Départ:</span>
+		{{disponibility.departureDate|date("d/m/Y")}}
+	</li>
+	<li>
+		<span class="font-medium">Date de Retour:</span>
+		{{disponibility.returnDate|date("d/m/Y")}}
+	</li>
+	<li>
+		<span class="font-medium">Prix:</span>
+		{{disponibility.price}}
+	</li>
+	<li>
+		<span class="font-medium">Disponible:</span>
+		{{(disponibility.status) ? "oui" : "non"}}
+	</li>
+</ul>
+<form method="post" action="{{ path('app_disponibilities_delete', {'id': disponibility.id}) }}">
+	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ disponibility.id) }}">
+</form>
