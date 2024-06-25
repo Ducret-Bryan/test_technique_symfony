@@ -1,4 +1,4 @@
-# Exercice Wikicampers
+# Test Technique Symfony
 
 J'ai utilisé WampServer pour faire ma base de donnée, le docker compose n'est pas encore au point.
 
@@ -66,5 +66,4 @@ VALUES
 - Docker
 - Bonus # 1
 - Bonus # 2
-- Changer les imputs des dates pour les rendre personnalisable
-- Faire que le min de la datesretour change par rapport à la date du départ.
+- Input de type date personnalisabl.
